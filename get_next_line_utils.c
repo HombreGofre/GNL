@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:33:37 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/03/31 13:02:00 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/01 12:39:42 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,25 @@ int	ft_strchr(const char *mem, int c)
 	if (c == 0)
 		return (i);
 	return (-1);
+}
+
+char	*ft_substr(char const *s, size_t start, size_t len)
+{
+	char *str;
+	size_t j;
+
+	if (!s)
+		return (0);
+	if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
+	str =  (char *)malloc(sizeof(*s) * (len + 1));
+	if (!str)
+		return (NULL);
+	j = 0;
+	while (j < len)
+	{
+		str[j++] = s[start++];
+	}
+	str[j] = '\0';
+	return (str);
 }
