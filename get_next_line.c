@@ -6,13 +6,13 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:29:00 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/01 12:39:45 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:34:10 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	*get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*mem;
 	char		*line;
@@ -21,18 +21,18 @@ int	*get_next_line(int fd)
 		return (NULL);
 	if (!(ft_strchr(mem, '\n')))
 	{
-		mem	= get_bite(*mem);
+		mem	= get_bite(mem, fd);
 	}
 	line = take_bite(&mem);
-	mem = save_bite(mem);
+	mem = save_mem(mem);
 	return (line);
 }
 
-char	*get_bite(char *mem)
+char	*get_bite(char *mem, int fd)
 {
-	char	buff[BUFFER_SIZE + 1]
+	char	buff[BUFFER_SIZE + 1];
 	char	*new_line;
-	size_t	cont;
+	int		cont;
 
 	cont = read (fd, &buff, BUFFER_SIZE);
 	while (cont > 0)
@@ -40,23 +40,39 @@ char	*get_bite(char *mem)
 		new_line[cont] = '\0';
 		new_line = ft_strjoin(mem, buff);
 		if (ft_strchr(mem, '\n'))
-			return ;
+			break;
 		cont = read (fd, &buff, BUFFER_SIZE);
 	}
 	return (new_line);
 }
 
-char	*take_bite(char *mem)
+char	*take_bite(char **mem)
 {
 	char	*rtn_str;
 	size_t	i;
-	size_t	start;
-	size_t	len;
 
-	cont = 0;
+	i = 0;
 	while (*mem[i] && *mem[i] != '\n')
 		i++;
 	rtn_str = ft_substr(*mem, 0, i + 1);
 	rtn_str[i + 1] = '\0';
 	return (rtn_str);
+}
+
+char	*save_mem(char *mem)
+{
+	char	*sv_str;
+	size_t	cont;
+
+	if (mem == NULL || ft_strchr(mem, '\0') == 0)
+		return (NULL);
+	cont = ft_strchr(mem, '\n');
+	if (cont < 0)
+		return (NULL);
+	else
+	{
+		sv_str = malloc(sizeof(char) * (ft_strlen(mem) - cont + 1));
+		free(mem);
+	}
+	return (sv_str);
 }
