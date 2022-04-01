@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:33:37 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/01 14:51:33 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:03:03 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,38 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
+char	*ft_strdup(const char *s1)
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	str = malloc(ft_strlen((char *)s1) + 1);
+	if (!s1 || !str)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	size_t	i;
 	size_t	j;
-
-	if (!s1)
+	
+	if (s1 == NULL)
 	{
-		str = (char *)malloc(sizeof(char *) * ft_strlen(s1) + 1);
-		if (!str)
+		if (s2 == NULL)
 			return (NULL);
+		return (ft_strdup(s2));
 	}
-	if (!s1 || !s2)
-		return (NULL);
+	if (s2 == NULL)
+		return (ft_strdup(s1));
 	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
@@ -55,6 +73,8 @@ int	ft_strchr(const char *s, int c)
 	int i;
 
 	i = 0;
+	if (!s)
+		return (-1);
 	while (s[i])
 	{
 		if (s[i] == (char)c)

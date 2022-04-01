@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:29:00 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/01 14:34:10 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:33:20 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*mem;
+	static char	*mem = NULL;
 	char		*line;
-
-	if (fd > 0 || BUFFER_SIZE < 1)
+	
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	if (!(ft_strchr(mem, '\n')))
 	{
@@ -49,9 +49,14 @@ char	*get_bite(char *mem, int fd)
 char	*take_bite(char **mem)
 {
 	char	*rtn_str;
+	char	buff[BUFFER_SIZE + 1];
+	char	**tmp;
 	size_t	i;
 
 	i = 0;
+	tmp = NULL;
+	*tmp = ft_strjoin(*mem, buff);
+	mem = tmp;
 	while (*mem[i] && *mem[i] != '\n')
 		i++;
 	rtn_str = ft_substr(*mem, 0, i + 1);

@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:30:28 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/01 14:30:35 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:08:42 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ size_t	ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(const char *mem, int c);
 char	*ft_substr(char const *s, size_t start, size_t len);
+char	*ft_strdup(const char *s1);
 
 #endif
 
