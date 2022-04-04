@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:30:28 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/01 16:08:42 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/04 13:08:12 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 char	*get_next_line(int fd);
 char	*get_bite(char *mem, int fd);
