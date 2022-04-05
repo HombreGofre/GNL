@@ -1,0 +1,7 @@
+*.out
+*.txt
+main.c
+Makefile
+
+*ester
+*.ou*
