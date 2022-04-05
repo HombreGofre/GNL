@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:29:00 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/04 14:34:36 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/05 14:05:10 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX)
 		return (NULL);
-	if (mem == NULL || !(ft_strchr(mem, '\n')))
+	if (mem == NULL || (ft_strchr(mem, '\n')))
 		mem = get_bite(mem, fd);
 	line = take_bite(&mem);
 	mem = save_mem(mem);
@@ -37,28 +37,27 @@ char	*get_bite(char *mem, int fd)
 	while (cont > 0)
 	{
 		buff[cont] = '\0';
-		new_line = ft_strjoin(mem, buff);
-		if (ft_strchr(mem, '\n'))
+		new_line = mem; 
+		mem = ft_strjoin(mem, buff);
+		free(new_line);
+		if (ft_strchr(mem, '\n') != -1)
 			break ;
 		cont = read (fd, &buff, BUFFER_SIZE);
 	}
-	return (new_line);
+	return (mem);
 }
 
 char	*take_bite(char **mem)
 {
 	char	*rtn_str;
 	char	*tmp;
-	char	*aux = *mem;
+	char	*aux;
 	size_t	i;
 
 	i = 0;
-	//*aux = *mem;
+	aux = *mem;
 	while (aux[i] && aux[i] != '\n')
-	{
-	//	printf(" I: %zu Mem: %p\n", i, *mem);
 		i++;
-	}
 	rtn_str = ft_substr(*mem, 0, i + 1);
 	if (ft_strlen(*mem) - i == 0)
 		tmp = NULL;

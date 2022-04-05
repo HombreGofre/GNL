@@ -6,12 +6,16 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:30:28 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/04 13:08:12 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/05 14:19:12 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 10
+#endif
 
 # include <string.h>
 # include <unistd.h>
