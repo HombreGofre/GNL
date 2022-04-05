@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:29:00 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/05 14:05:10 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:47:45 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ char	*take_bite(char **mem)
 {
 	char	*rtn_str;
 	char	*tmp;
-	char	*aux;
 	size_t	i;
 
+	if(*mem == NULL)
+		return (NULL);
 	i = 0;
-	aux = *mem;
-	while (aux[i] && aux[i] != '\n')
+	while ((*mem)[i] && (*mem)[i] != '\n')
 		i++;
 	rtn_str = ft_substr(*mem, 0, i + 1);
 	if (ft_strlen(*mem) - i == 0)
