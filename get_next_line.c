@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:29:00 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/05 15:47:45 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/06 15:34:13 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,28 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*mem = NULL;
+	static char	*mem;
 	char		*line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX)
 		return (NULL);
-	if (mem == NULL || (ft_strchr(mem, '\n')))
+	if (ft_strchr(mem, '\n'))
 		mem = get_bite(mem, fd);
 	line = take_bite(&mem);
 	mem = save_mem(mem);
 	return (line);
 }
+
+/*char	*empty_mem(void)
+{
+	char	*empty;
+	empty = malloc(sizeof(char));
+	if (!empty)
+		return (NULL);
+	*empty = '\0';
+	return (empty);
+}*/
 
 char	*get_bite(char *mem, int fd)
 {
@@ -34,14 +44,16 @@ char	*get_bite(char *mem, int fd)
 	int		cont;
 
 	cont = read (fd, &buff, BUFFER_SIZE);
-	while (cont > 0)
+	while (cont >= 0) //Preguntar
 	{
 		buff[cont] = '\0';
 		new_line = mem; 
 		mem = ft_strjoin(mem, buff);
 		free(new_line);
 		if (ft_strchr(mem, '\n') != -1)
+		{
 			break ;
+		}
 		cont = read (fd, &buff, BUFFER_SIZE);
 	}
 	return (mem);
@@ -53,6 +65,7 @@ char	*take_bite(char **mem)
 	char	*tmp;
 	size_t	i;
 
+	//printf("Mem take [%s]\n", *mem);
 	if(*mem == NULL)
 		return (NULL);
 	i = 0;
