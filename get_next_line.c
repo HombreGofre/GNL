@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:29:00 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/06 15:34:13 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:43:10 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ char	*get_bite(char *mem, int fd)
 	int		cont;
 
 	cont = read (fd, &buff, BUFFER_SIZE);
-	while (cont >= 0) //Preguntar
+	//if (cont == 0)
+	//	mem = empty_mem();
+	while (cont > 0) //Preguntar
 	{
 		buff[cont] = '\0';
 		new_line = mem; 
@@ -75,7 +77,7 @@ char	*take_bite(char **mem)
 	if (ft_strlen(*mem) - i == 0)
 		tmp = NULL;
 	else
-		tmp = ft_substr(*mem, i + 1, ft_strlen(*mem) - i);
+		tmp = ft_substr(*mem, i, ft_strlen(*mem) - i);
 	free(*mem);
 	*mem = tmp;
 	return (rtn_str);
@@ -86,8 +88,15 @@ char	*save_mem(char *mem)
 	char	*sv_str;
 	size_t	cont;
 
-	if (mem == NULL || ft_strchr(mem, '\0') == 0)
+	if (mem == NULL) {
 		return (NULL);
+	}
+	else if (ft_strchr(mem, '\0'))
+	{
+		free(mem);
+		//printf("Valor ------ [%s]\n", mem);
+		return NULL;
+	}
 	cont = ft_strchr(mem, '\n');
 	if (cont < 0)
 		return (NULL);
