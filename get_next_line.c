@@ -6,7 +6,7 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:29:00 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/07 12:58:43 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/07 13:26:50 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*get_bite(char *mem, int fd)
 			break ;
 		}
 		cont = read (fd, &buff, BUFFER_SIZE);
+		//printf("Cont [%d]\n", cont);
 	}
 	return (mem);
 }
