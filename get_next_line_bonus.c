@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 12:29:00 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/11 14:06:27 by cnunez-s         ###   ########.fr       */
+/*   Created: 2022/04/11 14:13:18 by cnunez-s          #+#    #+#             */
+/*   Updated: 2022/04/11 14:41:03 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	*mem;
+	static char	*mem[OPEN_MAX];
 	char		*line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX)
 		return (NULL);
-	if (ft_strchr(mem, '\n'))
-		mem = get_bite(mem, fd);
-	line = take_bite(&mem);
+	if (ft_strchr(mem[fd], '\n'))
+		mem[fd] = get_bite(mem[fd], fd);
+	line = take_bite(&mem[fd]);
 	return (line);
 }
 

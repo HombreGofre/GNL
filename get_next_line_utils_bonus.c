@@ -6,11 +6,11 @@
 /*   By: cnunez-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 12:33:37 by cnunez-s          #+#    #+#             */
-/*   Updated: 2022/04/11 14:09:56 by cnunez-s         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:31:02 by cnunez-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char const *str)
 {
